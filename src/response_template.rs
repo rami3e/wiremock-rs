@@ -12,7 +12,7 @@ use std::time::Duration;
 /// [`MockServer`]: crate::MockServer
 #[derive(Clone, Debug)]
 pub struct ResponseTemplate {
-    mime: Option<http_types::Mime>,
+    mime: Option<http_types::mime::Mime>,
     status_code: StatusCode,
     headers: HashMap<HeaderName, Vec<HeaderValue>>,
     body: Option<Vec<u8>>,
@@ -146,7 +146,7 @@ impl ResponseTemplate {
 
         self.body = Some(body);
         self.mime = Some(
-            http_types::Mime::from_str("application/json")
+            http_types::mime::Mime::from_str("application/json")
                 .expect("Failed to convert into Mime header"),
         );
         self
@@ -164,7 +164,7 @@ impl ResponseTemplate {
 
         self.body = Some(body.into_bytes());
         self.mime = Some(
-            http_types::Mime::from_str("text/plain").expect("Failed to convert into Mime header"),
+            http_types::mime::Mime::from_str("text/plain").expect("Failed to convert into Mime header"),
         );
         self
     }
@@ -221,7 +221,7 @@ impl ResponseTemplate {
         let body = body.try_into().expect("Failed to convert into body.");
         self.body = Some(body);
         self.mime =
-            Some(http_types::Mime::from_str(mime).expect("Failed to convert into Mime header"));
+            Some(http_types::mime::Mime::from_str(mime).expect("Failed to convert into Mime header"));
         self
     }
 
@@ -277,7 +277,7 @@ impl ResponseTemplate {
 
         // Add headers
         for (header_name, header_values) in &self.headers {
-            response.insert_header(header_name.clone(), header_values.as_slice());
+            let _ = response.insert_header(header_name.clone(), header_values.as_slice());
         }
 
         // Add body, if specified

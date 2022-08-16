@@ -1,6 +1,6 @@
 [package]
 name = "wiremock"
-version = "0.5.14"
+version = "0.5.15"
 authors = ["Luca Palmieri <rust@lpalmieri.com>"]
 edition = "2018"
 
@@ -20,7 +20,7 @@ path = "src/lib.rs"
 
 [dependencies]
 log = "0.4"
-http-types = { version = "2.11", default-features = false, features = ["hyperium_http"] }
+http-types = { git = "https://github.com/rami3e/http-types", rev = "7a9f312", default-features = false, features = ["hyperium_http"] }
 serde_json = "1"
 serde = "1"
 regex = "1"

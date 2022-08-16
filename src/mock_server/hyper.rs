@@ -91,7 +91,7 @@ async fn http_types_response_to_hyper_response(
 }
 
 fn headers_to_hyperium_headers(
-    headers: &mut http_types::Headers,
+    headers: &mut http_types::headers::Headers,
     hyperium_headers: &mut http::HeaderMap,
 ) {
     for (name, values) in headers {
